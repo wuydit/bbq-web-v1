@@ -1,57 +1,7 @@
 .navbar-header{
-    display: table;
+    padding-left: 20px;
+    padding-right: 20px;
 }
-.navbar-header:after {
-    clear: both;
-}
-.navbar-fixed-top {
-    top: 0;
-    border-width: 0 0 1px;
-}
-.navbar-default {
-    background-color: #fff;
-    border-color: #f0f0f0;
-}
-.navbar-fixed-bottom, .navbar-fixed-top {
-    position: fixed;
-    right: 0;
-    left: 0;
-    z-index: 1030;
-}
-nav {
-    height: 56px;
-}
-nav .logo img {
-    height: 100%;
-}
-.navbar {
+body {
     position: relative;
-    min-height: 50px;
-    margin-bottom: 20px;
-    border: 1px solid transparent;
-}
-a:-webkit-any-link {
-    color: -webkit-link;
-    cursor: pointer;
-    text-decoration: underline;
-}
-a, body {
-    color: #333;
-}
-body{
-    padding-top: 56px!important;
-    min-width: 768px;
-    font-family: -apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;
-    font-size: 17px;
-    line-height: 1.42857;
-    background-color: #fff;
-}
-img {
-    vertical-align: middle;
-}
-img {
-    border: 0;
-}
-nav .logo img {
-    height: 100%;
 }

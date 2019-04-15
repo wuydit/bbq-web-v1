@@ -11,17 +11,104 @@
     <script src="js/jquery.cookie.js"></script>
     <script src="js/jquery.growl.js"></script>
     <script src="js/bootstrap.js"></script>
+    <script src="js/page/common.js"></script>
     <script src="js/page/index.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation"></nav>
-<div class="width-limit">
-    <a class="logo">
-        <p>表白墙</p>
-    </a>
-    bar
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">首页</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav col-md-4">
+
+            </ul>
+            <form class="navbar-form navbar-left">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="搜索你想要的内容">
+                </div>
+                <button type="submit" class="btn btn-default">搜索</button>
+            </form>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#" class="login" data-toggle="modal" data-target="#loginModal">登录</a></li>
+                <li><a href="#" class="register">注册</a></li>
+
+                <li>
+                    <a href="#" class="register">
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true">发帖</span>
+                    </a>
+
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我的
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">我的主页</a></li>
+                        <li><a href="#">修改个人信息</a></li>
+                        <li><a href="#">修改密码</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">退出</a></li>
+                    </ul>
+                </li>
+            </ul><!--  /.navbar-right -->
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<div>
+    <div class="row">
+        <div class="col-xs-16 main">
+            <div id="list-container">
+                <!-- 文章列表模块 -->
+                <ul class="note-list" infinite-scroll-url="/">
+                    nih
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
-<div>c
-    ontent</div>
+<footer class="container">
+    <div class="row">
+        <div class="col-xs-17 main" >
+            <a target="_blank" href="http://github.com/wuydit">联系我 wuydit@163.com</a>
+        </div>
+    </div>
+</footer>
+<!-- Modal 登录框 -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLable">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="loginModalLable">登录</h4>
+            </div>
+            <div class="modal-body">
+                    <div class="form-group">
+                        <label for="loginUsername">用户名</label>
+                        <input type="text" class="form-control" id="loginUsername" placeholder="请输入用户名|邮箱|手机号">
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">密码</label>
+                        <input type="password" class="form-control" id="loginPassword" placeholder="密码">
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭当前</button>
+                <button type="button" class="btn btn-default register">注册</button>
+                <button type="button" class="btn btn-primary" id="loginAuth">登录</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
