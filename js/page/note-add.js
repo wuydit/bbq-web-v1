@@ -6,9 +6,7 @@ $(function () {
         console.log("获取到省份列表状态"+status);
         console.log("获取到省份列表"+data);
         data.forEach(v=>{
-            let key = v.idNum;
-            let value = v.name;
-            let option = `<option value="${key}">${value}</option>`;
+            let option = `<option value="${v.idNum}">${v.name}</option>`;
             $('#provinceList').append(option);
         })
     }, 'json');
@@ -60,9 +58,7 @@ $(function () {
             console.log("获取到城市列表状态"+status);
             console.log("获取到城市列表"+data);
             data.forEach(v=>{
-                let key = v.id;
-                let value = v.name;
-                let option = `<option value="${key}">${value}</option>`;
+                let option = `<option value="${v.id}">${v.name}</option>`;
                 $('#cityList').append(option);
             })
         }, 'json');
@@ -74,9 +70,7 @@ $(function () {
             console.log("获取到学校列表状态"+status);
             console.log("获取到学校列表"+data);
             data.forEach(v=>{
-                let key = v.id;
-                let value = v.schoolName;
-                let option = `<option value="${key}">${value}</option>`;
+                let option = `<option value="${v.id}">${v.schoolName}</option>`;
                 $('#schoolList').append(option);
             })
         }, 'json');
