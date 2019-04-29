@@ -3,7 +3,7 @@
  */
 let page = 0;
 let size = 10;
-let sort = {sort:'createTime,desc'};
+let sort = {sort: 'createTime,desc'};
 // $.cookie('the_cookie', 'the_value', { expires: 7 });
 // let user = $.cookie('the_cookie');
 // console.log(user);
@@ -13,7 +13,7 @@ let sort = {sort:'createTime,desc'};
 //分页查询
 
 
-$(function(){
+$(function () {
     initPage();
 
 
@@ -29,8 +29,8 @@ $(function(){
 const initPage = function () {
     let page = 0;
     let size = 10;
-    let sort = {sort:'createTime,desc'};
-    getNoteListPage(page,size,sort);
+    let sort = {sort: 'createTime,desc'};
+    getNoteListPage(page, size, sort);
 
 };
 
@@ -39,12 +39,12 @@ const initPage = function () {
  */
 const getNoteListPage = function (page, size, sort) {
     console.log("getNoteListPage 获取列表值.");
-    console.log("get"+SERVER_URL + "api/note");
+    console.log("get" + SERVER_URL + "api/note");
     $.get(
         SERVER_URL + "api/note",
         {page: page, size: size, sort: sort},
         function (data) {
-            console.log("return "+data + "");
+            console.log("return " + data + "");
             addNoteList(data);
         });
 };
@@ -55,43 +55,44 @@ const getNoteListPage = function (page, size, sort) {
  * */
 const addNoteList = function (data) {
     console.log("!!data" + !!data);
-    console.log("data.content" +data.content);
+    console.log("data.content" + data.content);
     console.log("data.content.length" + data.content.length);
-    if(!!data && data.content && data.content.length>0){
-        data.content.forEach(v =>{
-            if(!v.isAnonymous){
-                $(".note-list").append("<li id='note-"+v.id+"' data-note-id='"+v.id+"' class=\"\">\n" +
-                    "                        <div class=\"content\">\n" +
-                    "                            <a class=\"title\" target=\"_blank\" href=\"/p/c9daa2f30186\">"+v.noteTitle+"</a>\n" +
-                    "                            <p class=\"abstract\">\n"+ v.noteAbstract+"\n</p>\n" +
-                    "                            <div class=\"meta\">\n" +
-                    "                                <a class=\"nickname\" target=\"_blank\" href=\"/u/d7184de1da60\">"+v.user.username+"</a>\n" +
-                    "                                <a class=\"nickname\" target=\"_blank\" href=\"/u/d7184de1da60\">"+v.user.noteSchool+"</a>\n" +
-                    "                                <a class=\"nickname\" target=\"_blank\" href=\"/u/d7184de1da60\">"+v.user.noteCity+"</a>\n" +
-                    "                                <a target=\"_blank\" href=\"/p/c9daa2f30186#comments\">\n" +
-                    "                                    <i class=\"iconfont ic-list-comments\"></i>"+v.notePraise+"\n</a>" +
-                    "<span><i class=\"iconfont ic-list-like\"></i>"+v.notePraise+"</span>\n" +
-                    "<span><i class=\"iconfont ic-list-like\"></i>"+v.noteTrash+"</span>\n" +
-                    "<span><i class=\"iconfont ic-list-like\"></i>"+v.noteReadCount+"</span>\n" +
-                    "                            </div>\n" +
-                    "                        </div>\n" +
-                    "                    </li>");
-            }else {
-                $(".note-list").append("<li id='note-"+v.id+"' data-note-id='"+v.id+"' class=\"\">\n" +
-                    "                        <div class=\"content\">\n" +
-                    "                            <a class=\"title\" target=\"_blank\" href=\"/p/c9daa2f30186\">"+v.noteTitle+"</a>\n" +
-                    "                            <p class=\"abstract\">\n"+ v.noteAbstract+"\n</p>\n" +
-                    "                            <div class=\"meta\">\n" +
-                    "                                <a target=\"_blank\" href=\"/p/c9daa2f30186#comments\">\n" +
-                    "                                    <i class=\"iconfont ic-list-comments\"></i> 74\n</a>\n" +
-                    "<span><i class=\"iconfont ic-list-like\"></i>"+v.notePraise+"</span>\n" +
-                    "<span><i class=\"iconfont ic-list-like\"></i>"+v.noteTrash+"</span>\n" +
-                    "<span><i class=\"iconfont ic-list-like\"></i>"+v.noteReadCount+"</span>\n" +
-                    "                            </div>\n" +
-                    "                        </div>\n" +
-                    "                    </li>");
+    if (!!data && data.content && data.content.length > 0) {
+        data.content.forEach(v => {
+            if (!v.isAnonymous) {
+                let note_node = `<div id='note-${v.id}' data-note-id='${v.id}'>
+                                    <div class="content">
+                                        <a class="title" target="_blank" href="/p/c9daa2f30186\\">${v.noteTitle}</a>
+                                        <p class="abstract">${v.noteAbstract}</p>
+                                        <div class="meta">
+                                            <a class="nickname" target="_blank" href=\\"/u/d7184de1da60\\">${v.user.username}</a>
+                                            <a class="nickname" target="_blank" href=\\"/u/d7184de1da60\\">${v.user.noteSchool}</a>
+                                            <a class="nickname" target="_blank" href=\\"/u/d7184de1da60\\">${v.user.noteCity}</a>
+                                            <a target="_blank" href="/p/c9daa2f30186#comments\\">
+                                            <i class="iconfont ic-list-comments\\"></i>${v.notePraise}</a>
+                                            <span><i class="iconfont ic-list-like"></i>${v.notePraise}</span>
+                                            <span><i class="iconfont ic-list-like"></i>${v.noteTrash}</span>
+                                            <span><i class="iconfont ic-list-like"></i>${v.noteReadCount}</span>
+                                         </div>
+                                        </div>
+                                 </div>`;
+                $(".note-list").append(note_node);
+            } else {
+                let note_node = `<div  id='note-${v.id}' data-note-id='${v.id}'>
+                                    <div class="content">
+                                        <a class="title" target="_blank" href="/p/c9daa2f30186\\">${v.noteTitle}</a>
+                                        <p class="abstract">${v.noteAbstract}</p>
+                                        <div class="meta">
+                                            <a target="_blank" href="/p/c9daa2f30186#comments\\">
+                                            <i class="iconfont ic-list-comments\\"></i>${v.notePraise}</a>
+                                            <span><i class="iconfont ic-list-like"></i>${v.notePraise}</span>
+                                            <span><i class="iconfont ic-list-like"></i>${v.noteTrash}</span>
+                                            <span><i class="iconfont ic-list-like"></i>${v.noteReadCount}</span>
+                                         </div>
+                                        </div>
+                                 </div>`;
+                $(".note-list").append(note_node);
             }
-
         });
     }
 };
