@@ -56,7 +56,7 @@ $(function () {
 
     function fillCityList(inNum){
         $("#cityList").empty();
-        $.get(URL_CITYS_LIST,{idNumParent:inNum},function(data,status){
+        $.get(URL_CITY_LIST,{idNumParent:inNum},function(data, status){
             console.log("获取到城市列表状态"+status);
             console.log("获取到城市列表"+data);
             data.forEach(v=>{

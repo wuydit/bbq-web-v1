@@ -11,7 +11,7 @@ const API = 'api/';
 const SERVER_URL = "http://localhost:8000/";
 const URL_NOTE_ADD = SERVER_URL + API + 'note' + '?token=' + token;
 const URL_PROVINCES = SERVER_URL + API + 'provinces' + '?token=' + token;
-const URL_CITYS_LIST = SERVER_URL + API + 'citys' + '?token=' + token;
+const URL_CITY_LIST = SERVER_URL + API + 'citys' + '?token=' + token;
 const URL_SCHOOL_LIST = SERVER_URL + API + 'schools' + '?token=' + token;
 
 
