@@ -69,7 +69,6 @@ const addNoteList = function (data) {
                                             <a class="nickname" target="_blank" href=\\"/u/d7184de1da60\\">${v.user.noteSchool}</a>
                                             <a class="nickname" target="_blank" href=\\"/u/d7184de1da60\\">${v.user.noteCity}</a>
                                             <a target="_blank" href="/p/c9daa2f30186#comments\\">
-                                            <i class="iconfont ic-list-comments\\"></i>${v.notePraise}</a>
                                             <span><i class="iconfont ic-list-like"></i>${v.notePraise}</span>
                                             <span><i class="iconfont ic-list-like"></i>${v.noteTrash}</span>
                                             <span><i class="iconfont ic-list-like"></i>${v.noteReadCount}</span>
@@ -84,7 +83,6 @@ const addNoteList = function (data) {
                                         <p class="abstract">${v.noteAbstract}</p>
                                         <div class="meta">
                                             <a target="_blank" href="/p/c9daa2f30186#comments\\">
-                                            <i class="iconfont ic-list-comments\\"></i>${v.notePraise}</a>
                                             <span><i class="iconfont ic-list-like"></i>${v.notePraise}</span>
                                             <span><i class="iconfont ic-list-like"></i>${v.noteTrash}</span>
                                             <span><i class="iconfont ic-list-like"></i>${v.noteReadCount}</span>

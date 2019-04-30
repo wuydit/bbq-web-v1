@@ -30,10 +30,15 @@ $(function () {
             type: 'POST',
             url: URL_NOTE_ADD,
             dataType: "json",
-            data: {
+            contentType: "application/json;charset=UTF-8",
+            data: JSON.stringify({
                 noteTitle: $('#noteAddInputTitle').val(),
-                noteContent: $('.note-editable').html()
-            },
+                noteAbstract: $('#noteAbstract').val(),
+                isAnonymous: $('#isAnonymous').val(),
+                noteContent: $('.note-editable').html(),
+                noteCity: {id: $('#cityList').val()},
+                noteSchool:{id: $('#schoolList').val()}
+            }),
             success: function () {
                 $.growl({title: "成功", message: "页面准备跳转!"});
                 //成功则跳转

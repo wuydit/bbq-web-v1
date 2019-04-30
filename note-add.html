@@ -56,24 +56,35 @@
 <div class="m">
     <div class="form-group">
         <label for="noteAddInputTitle">标题</label>
-        <input type="email" class="form-control" id="noteAddInputTitle" placeholder="文章标题">
+        <input type="text" class="form-control" id="noteAddInputTitle" placeholder="文章标题">
+    </div>
+    <div class="form-group">
+        <label for="noteAbstract">概述</label>
+        <textarea  class="form-control" rows="3" id="noteAbstract" placeholder="文章概述"></textarea>
     </div>
     <div class="form-group">
         <label for="noteAddInputBody">内容</label>
         <div id="noteAddInputBody" class="summer-note">文章内容</div>
     </div>
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-3">
         <label for="provinceList">省份列表</label>
         <select class="form-control" id="provinceList"></select>
     </div>
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-3">
         <label for="cityList">城市列表</label>
         <select class="form-control" id="cityList"></select>
     </div>
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-3">
         <label for="schoolList">学校列表</label>
         <select class="form-control" id="schoolList">
             <option></option>
+        </select>
+    </div>
+    <div class="form-group col-md-3">
+        <label for="schoolList">是否匿名</label>
+        <select class="form-control" id="isAnonymous">
+            <option value="false">否</option>
+            <option value="true">是</option>
         </select>
     </div>
     <div>
