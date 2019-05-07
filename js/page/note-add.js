@@ -29,17 +29,17 @@ $(function () {
         let noteContent = $('.note-editable').html();
         if(isSensitiveWord(noteTitle)){
             $.growl.error({title: "标题敏感词", message: '请不要输入相关敏感词。<br>请修改后重新提交。'});
-            // $('#noteAddInputTitle').val(replaceSensitiveWord(noteTitle));
+            $('#noteAddInputTitle').val(replaceSensitiveWord(noteTitle));
             return false;
         }
         if(isSensitiveWord(noteAbstract)){
             $.growl.error({title: "简介敏感词", message: '请不要输入相关敏感词。<br>请修改后重新提交。'});
-            $('#noteAddInputTitle').val(replaceSensitiveWord(noteAbstract));
+            $('#noteAbstract').val(replaceSensitiveWord(noteAbstract));
             return false;
         }
         if(isSensitiveWord(noteContent)){
             $.growl.error({title: "正文敏感词", message: '请不要输入相关敏感词。<br>请修改后重新提交。'});
-            $('#noteAddInputTitle').val(replaceSensitiveWord(noteContent));
+            $('.note-editable').html(replaceSensitiveWord(noteContent));
             return false;
         }
 
@@ -94,30 +94,45 @@ $(function () {
         }, 'json');
     }
 
-    function isSensitiveWord(word){
-        $.ajax({
-            type: 'GET',
-            url: URL_IS_SENSITIVE_WORD,
-            dataType: "json",
-            contentType: "application/json;charset=UTF-8",
-            data: {word:word},
-            async: false,
-            success: function (data) {
-                console.log("当前字符串有敏感词"+data.isSensitiveWord);
-                return !!data.isSensitiveWord;
-            },
-            error: function () {
-                $.growl.error({title: "发生错误", message: '服务器错误。<br>请稍后提交。'});
-                return true;
-            }
-        });
-        console.log(1);
-    }
-    function replaceSensitiveWord(word){
-        $.get(URL_REPLACE_SENSITIVE_WORD,{word:word},function(data,status){
-            console.log("替换后敏感词"+data.msg);
-            return data.msg;
-        }, 'json');
-    }
+
 
 });
+
+function isSensitiveWord(word){
+    let flag = false;
+    $.ajax({
+        type: 'GET',
+        url: URL_IS_SENSITIVE_WORD,
+        dataType: "json",
+        contentType: "application/json;charset=UTF-8",
+        data: {word:word},
+        async: false,
+        success: function (data) {
+            console.log("当前字符串有敏感词"+data.isSensitiveWord);
+            flag = !!data.isSensitiveWord ;
+        },
+        error: function () {
+            $.growl.error({title: "发生错误", message: '服务器错误。<br>请稍后提交。'});
+        }
+    });
+    return flag;
+}
+function replaceSensitiveWord(word){
+    let result = word;
+    $.ajax({
+        type: 'GET',
+        url: URL_REPLACE_SENSITIVE_WORD,
+        dataType: "json",
+        contentType: "application/json;charset=UTF-8",
+        data: {word:word},
+        async: false,
+        success: function (data) {
+            console.log("替换后敏感词"+data.msg);
+            result =  data.msg;
+        },
+        error: function () {
+            $.growl.error({title: "发生错误", message: '服务器错误。<br>请稍后提交。'});
+        }
+    });
+    return result;
+}
