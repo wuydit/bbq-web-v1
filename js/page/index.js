@@ -20,18 +20,15 @@ $(function () {
     /**
      * 注册按钮触发页面跳转
      * */
-
-
+    $('.next-page').click(function(){
+        getNoteListPage(page++, size, sort)
+    });
 });
 /**
  * 页面初始化
  * */
 const initPage = function () {
-    let page = 0;
-    let size = 10;
-    let sort = {sort: 'createTime,desc'};
     getNoteListPage(page, size, sort);
-
 };
 
 /**
@@ -60,33 +57,43 @@ const addNoteList = function (data) {
     if (!!data && data.content && data.content.length > 0) {
         data.content.forEach(v => {
             if (!v.isAnonymous) {
-                let note_node = `<div id='note-${v.id}' data-note-id='${v.id}'>
-                                    <div class="content">
-                                        <a class="title" target="_blank" href="/p/c9daa2f30186\\">${v.noteTitle}</a>
-                                        <p class="abstract">${v.noteAbstract}</p>
-                                        <div class="meta">
-                                            <a class="nickname" target="_blank" href=\\"/u/d7184de1da60\\">${v.user.username}</a>
-                                            <p class="nickname">${v.noteSchool.schoolName}</p>
-                                            <p class="nickname">${v.noteCity.name}</p>
-                                            <span><a class="iconfont ic-list-like">${v.notePraise}</a></span>
-                                            <span><a class="iconfont ic-list-like">${v.noteTrash}</a></span>
-                                            <span><a class="iconfont ic-list-like">${v.noteReadCount}</a></span>
-                                         </div>
-                                        </div>
-                                 </div>`;
+                let note_node = `<div id='note-${v.id}' data-note-id='${v.id}' class="col-md-4">
+                        <div class="panel panel-default ">
+                            <div class="panel-heading">
+                                ${v.noteTitle}
+                            </div>
+                            <div class="panel-body">
+                                ${v.noteAbstract}
+                            </div>
+                            <div class="panel-footer">
+                                <a class="" target="_blank" href=\\\\"/u/d7184de1da60\\\\">${v.user.username}</a>
+                                <span  aria-hidden="true">${v.noteSchool.schoolName}</span>&nbsp&nbsp
+                                <span  aria-hidden="true">${v.noteCity.name}</span>&nbsp&nbsp
+                                <span class="glyphicon glyphicon-thumbs-up notePraise" aria-hidden="true">${v.notePraise}</span>&nbsp&nbsp
+                                <span class="glyphicon glyphicon-thumbs-down noteTrash">${v.noteTrash}</span>&nbsp&nbsp
+                                <span class="glyphicon glyphicon-fire noteReadCount">${v.noteReadCount}</span>&nbsp&nbsp
+                            </div>
+                        </div>
+                    </div>`;
                 $(".note-list").append(note_node);
             } else {
-                let note_node = `<div  id='note-${v.id}' data-note-id='${v.id}'>
-                                    <div class="content">
-                                        <a class="title" target="_blank" href="/p/c9daa2f30186\\">${v.noteTitle}</a>
-                                        <p class="abstract">${v.noteAbstract}</p>
-                                        <div class="meta">
-                                            <span><a class="iconfont ic-list-like">${v.notePraise}</a></span>
-                                            <span><a class="iconfont ic-list-like">${v.noteTrash}</a></span>
-                                            <span><a class="iconfont ic-list-like">${v.noteReadCount}</a></span>
-                                         </div>
-                                        </div>
-                                 </div>`;
+                let note_node = `<div id='note-${v.id}' data-note-id='${v.id}' class="col-md-4">
+                        <div class="panel panel-default ">
+                            <div class="panel-heading text-center">
+                                ${v.noteTitle}
+                            </div>
+                            <div class="panel-body">
+                                ${v.noteAbstract}
+                            </div>
+                            <div class="panel-footer">
+                                <span  aria-hidden="true">${v.noteSchool.schoolName}</span>&nbsp&nbsp
+                                <span  aria-hidden="true">${v.noteCity.name}</span>&nbsp&nbsp
+                                <span class="glyphicon glyphicon-thumbs-up notePraise" aria-hidden="true">${v.notePraise}</span>&nbsp&nbsp
+                                <span class="glyphicon glyphicon-thumbs-down noteTrash">${v.noteTrash}</span>&nbsp&nbsp
+                                <span class="glyphicon glyphicon-fire noteReadCount">${v.noteReadCount}</span>&nbsp&nbsp
+                            </div>
+                        </div>
+                    </div>`;
                 $(".note-list").append(note_node);
             }
         });

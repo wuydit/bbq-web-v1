@@ -13,6 +13,7 @@ const URL_NOTE_ADD = SERVER_URL + API + 'note' + '?token=' + token;
 const URL_PROVINCES = SERVER_URL + API + 'provinces' + '?token=' + token;
 const URL_CITY_LIST = SERVER_URL + API + 'citys' + '?token=' + token;
 const URL_SCHOOL_LIST = SERVER_URL + API + 'schools' + '?token=' + token;
+
 /**
  *
  * @type {string}
@@ -24,5 +25,9 @@ const URL_IS_SENSITIVE_WORD = SERVER_URL + API + 'isSensitiveWord' + '?token=' +
  */
 const URL_REPLACE_SENSITIVE_WORD = SERVER_URL + API + 'replaceSensitiveWord' + '?token=' + token;
 
-
+$.getUrlParam = function(name) {
+    let reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    let r = window.location.search.substr(1).match(reg);
+    if (r!=null) return unescape(r[2]); return null;
+};
 

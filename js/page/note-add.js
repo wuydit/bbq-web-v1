@@ -56,9 +56,10 @@ $(function () {
                 noteCity: {id: $('#cityList').val()},
                 noteSchool:{id: $('#schoolList').val()}
             }),
-            success: function () {
+            success: function (data) {
                 $.growl({title: "成功", message: "页面准备跳转!"});
                 //成功则跳转
+                window.location.href = "note-details.html?noteId=" + data.id;
             },
             error: function () {
                 $('#note_add_submit').removeClass('disabled');

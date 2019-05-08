@@ -2,11 +2,13 @@
 <html lang="zh-cn">
 <head>
     <meta charset="UTF-8">
-    <title>表白墙</title>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css" />
-    <link rel="stylesheet" type="text/css" href="css/jquery.growl.css" />
-    <link rel="stylesheet" type="text/css" href="css/page/index.css" />
+    <title>主页</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+    <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css"/>
+    <link rel="stylesheet" type="text/css" href="css/jquery.growl.css"/>
+    <link rel="stylesheet" type="text/css" href="css/page/index.css"/>
     <link rel="stylesheet" type="text/css" href="css/page/common.css">
     <script src="js/jquery-3.3.1.js"></script>
     <script src="js/jquery.cookie.js"></script>
@@ -35,7 +37,7 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#" class="login" data-toggle="modal" data-target="#loginModal">登录</a></li>
-                <li><a href="#" class="register">注册</a></li>
+                <li><a href="register.html" class="register">注册</a></li>
 
                 <li>
                     <a href="note-add.html" class="register">
@@ -44,7 +46,8 @@
 
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我的
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">我的
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">我的主页</a></li>
@@ -58,107 +61,30 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-<div>
-    <div >
-        <div class="col-md-12">
-            <div id="list-container">
-                <!-- 文章列表模块 -->
-                <div class="note-list" infinite-scroll-url="/">
-
-                    <div class="col-md-4">
-                        <div class="panel panel-default ">
-                            <div class="panel-heading">
-                                标题
-                            </div>
-                            <div class="panel-body">
-                                Panel content
-                            </div>
-                            <div class="panel-footer">
-                                <a class="" target="_blank" href=\\"/u/d7184de1da60\\">wuyd</a>河北理工唐山
-                                <span>12</span>
-                                <span>16</span>
-                                <span>16</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="panel panel-default ">
-                            <div class="panel-heading">
-                                标题
-                            </div>
-                            <div class="panel-body">
-                                Panel content
-                            </div>
-                            <div class="panel-footer">
-                                <a class="" target="_blank" href=\\"/u/d7184de1da60\\">wuyd</a>河北理工唐山
-                                <span>12</span>
-                                <span>16</span>
-                                <span>16</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="panel panel-default ">
-                            <div class="panel-heading">
-                                标题
-                            </div>
-                            <div class="panel-body">
-                                Panel content
-                            </div>
-                            <div class="panel-footer">
-                                <a class="" target="_blank" href=\\"/u/d7184de1da60\\">wuyd</a>河北理工唐山
-                                <span>12</span>
-                                <span>16</span>
-                                <span>16</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="panel panel-default ">
-                            <div class="panel-heading">
-                                标题
-                            </div>
-                            <div class="panel-body">
-                                Panel content
-                            </div>
-                            <div class="panel-footer">
-                                <a class="" target="_blank" href=\\"/u/d7184de1da60\\">wuyd</a>河北理工唐山
-                                <span>12</span>
-                                <span>16</span>
-                                <span>16</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="panel panel-default ">
-                            <div class="panel-heading">
-                                标题
-                            </div>
-                            <div class="panel-body">
-                                Panel content
-                            </div>
-                            <div class="panel-footer">
-                                <a class="" target="_blank" href=\\"/u/d7184de1da60\\">wuyd</a>河北理工唐山
-                                <span>12</span>
-                                <span>16</span>
-                                <span>16</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!--文章-->
+<div class="col-md-12">
+    <div id="list-container">
+        <!-- 文章列表模块 -->
+        <div class="note-list" infinite-scroll-url="/">
         </div>
     </div>
 </div>
-<footer  class="text-center footer-left-reght-padding">
+<!--文章end-->
+<!--底部信息-->
+<div class="col-md-12">
+    <div class="text-center">
+        <span class="next-page col-md-4 col-md-offset-4">阅读更多</span>
+    </div>
+</div>
+
+<div class="text-center footer-left-reght-padding">
     <div class="row">
         <div> wuyd 版权所有</div>
         <div>
             <a target="_blank" href="http://github.com/wuydit">联系我 wuydit@163.com</a>
         </div>
     </div>
-</footer>
+</div>
 <!-- Modal 登录框 -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLable">
     <div class="modal-dialog" role="document">
@@ -170,14 +96,14 @@
                 <h4 class="modal-title" id="loginModalLable">登录</h4>
             </div>
             <div class="modal-body">
-                    <div class="form-group">
-                        <label for="loginUsername">用户名</label>
-                        <input type="text" class="form-control" id="loginUsername" placeholder="请输入用户名|邮箱|手机号">
-                    </div>
-                    <div class="form-group">
-                        <label for="loginPassword">密码</label>
-                        <input type="password" class="form-control" id="loginPassword" placeholder="密码">
-                    </div>
+                <div class="form-group">
+                    <label for="loginUsername">用户名</label>
+                    <input type="text" class="form-control" id="loginUsername" placeholder="请输入用户名|邮箱|手机号">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">密码</label>
+                    <input type="password" class="form-control" id="loginPassword" placeholder="密码">
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭当前</button>
