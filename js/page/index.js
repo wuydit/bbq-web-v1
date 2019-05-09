@@ -15,6 +15,7 @@ let sort = {sort: 'createTime,desc'};
 
 $(function () {
     initPage();
+    let documentBody = $("body");
 
 
     /**
@@ -23,6 +24,74 @@ $(function () {
     $('.next-page').click(function(){
         getNoteListPage(page++, size, sort)
     });
+
+    /**
+     * 跳转到详情页
+     */
+    documentBody.delegate(".note-url","click",function(){
+        let id = $(this).parent().parent().attr("data-note-id");
+        window.location.href = "note-details.html?noteId=" + id;
+    });
+
+    /**
+     * 点赞
+     */
+    documentBody.delegate(".notePraise","click",function(){
+        let id = $(this).parent().parent().parent().attr("data-note-id");
+        $.ajax({
+            type: 'GET',
+            url: SERVER_URL + 'api/note/'+id+'/notePraise?token='+token,
+            dataType: "json",
+            contentType: "application/json;charset=UTF-8",
+            success: function (data) {
+                console.log("notePraise " + data.notePraise + "");
+                $('#note-'+id).find('.notePraise').text(data.notePraise);
+                $.growl({title: "成功", message: "点赞!"});
+            },
+            error: function (data) {
+                $.growl.error({title: "发生错误", message: '服务器错误。'});
+            }
+        });
+    });
+
+    // $(document).on("click",".noteTrash", function() {
+    //     let id = $(this).parent().parent().parent().attr("data-note-id");
+    //         $.ajax({
+    //             type: 'GET',
+    //             url: SERVER_URL + 'api/note/'+id+'/noteTrash?token='+token,
+    //             dataType: "json",
+    //             contentType: "application/json;charset=UTF-8",
+    //             success: function (data) {
+    //                 console.log("noteTrash " + data.noteTrash + "");
+    //                 $('#note-'+id).find('.noteTrash').text(data.noteTrash);
+    //                 $.growl({title: "成功", message: "踩!"});
+    //             },
+    //             error: function (data) {
+    //                 $.growl.error({title: "发生错误", message: '服务器错误。'});
+    //             }
+    //         });
+    // });
+    /**
+     * 踩
+     */
+    documentBody.delegate(".noteTrash","click",function(){
+      let id = $(this).parent().parent().parent().attr("data-note-id");
+        $.ajax({
+            type: 'GET',
+            url: SERVER_URL + 'api/note/'+id+'/noteTrash?token='+token,
+            dataType: "json",
+            contentType: "application/json;charset=UTF-8",
+            success: function (data) {
+                console.log("noteTrash " + data.noteTrash + "");
+                $('#note-'+id).find('.noteTrash').text(data.noteTrash);
+                $.growl({title: "成功", message: "踩!"});
+            },
+            error: function (data) {
+                $.growl.error({title: "发生错误", message: '服务器错误。'});
+            }
+        });
+    });
+
 });
 /**
  * 页面初始化
@@ -46,43 +115,41 @@ const getNoteListPage = function (page, size, sort) {
         });
 };
 
+
 /**
  * 拿到note列去填充
  * @param data json 数据列
  * */
 const addNoteList = function (data) {
-    console.log("!!data" + !!data);
-    console.log("data.content" + data.content);
-    console.log("data.content.length" + data.content.length);
     if (!!data && data.content && data.content.length > 0) {
         data.content.forEach(v => {
             if (!v.isAnonymous) {
-                let note_node = `<div id='note-${v.id}' data-note-id='${v.id}' class="col-md-4">
+                let note_node = `<div id='note-${v.id}' data-note-id='${v.id}' class="col-md-4 note">
                         <div class="panel panel-default ">
-                            <div class="panel-heading">
+                            <div class="panel-heading note-url">
                                 ${v.noteTitle}
                             </div>
-                            <div class="panel-body">
+                            <div class="panel-body note-url">
                                 ${v.noteAbstract}
                             </div>
                             <div class="panel-footer">
                                 <a class="" target="_blank" href=\\\\"/u/d7184de1da60\\\\">${v.user.username}</a>
                                 <span  aria-hidden="true">${v.noteSchool.schoolName}</span>&nbsp&nbsp
                                 <span  aria-hidden="true">${v.noteCity.name}</span>&nbsp&nbsp
-                                <span class="glyphicon glyphicon-thumbs-up notePraise" aria-hidden="true">${v.notePraise}</span>&nbsp&nbsp
-                                <span class="glyphicon glyphicon-thumbs-down noteTrash">${v.noteTrash}</span>&nbsp&nbsp
+                                <span class="glyphicon glyphicon-thumbs-up notePraise  btn btn-info" aria-hidden="true">${v.notePraise}</span>&nbsp&nbsp
+                                <span class="glyphicon glyphicon-thumbs-down noteTrash  btn btn-danger" onclick="onclickNoteTrash(this)">${v.noteTrash}</span>&nbsp&nbsp
                                 <span class="glyphicon glyphicon-fire noteReadCount">${v.noteReadCount}</span>&nbsp&nbsp
                             </div>
                         </div>
                     </div>`;
                 $(".note-list").append(note_node);
             } else {
-                let note_node = `<div id='note-${v.id}' data-note-id='${v.id}' class="col-md-4">
+                let note_node = `<div id='note-${v.id}' data-note-id='${v.id}' class="col-md-4 note">
                         <div class="panel panel-default ">
-                            <div class="panel-heading text-center">
+                            <div class="panel-heading text-center note-url">
                                 ${v.noteTitle}
                             </div>
-                            <div class="panel-body">
+                            <div class="panel-body note-url">
                                 ${v.noteAbstract}
                             </div>
                             <div class="panel-footer">

@@ -16,6 +16,11 @@ const URL_SCHOOL_LIST = SERVER_URL + API + 'schools' + '?token=' + token;
 
 /**
  *
+ */
+const URL_NOTE_PRAISE = SERVER_URL + API + 'notePraise' + '?token=' + token;
+
+/**
+ *
  * @type {string}
  */
 const URL_IS_SENSITIVE_WORD = SERVER_URL + API + 'isSensitiveWord' + '?token=' + token;

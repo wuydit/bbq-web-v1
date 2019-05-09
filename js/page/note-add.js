@@ -1,3 +1,4 @@
+
 $(function () {
     /**
      * 获取省份列表
@@ -61,9 +62,11 @@ $(function () {
                 //成功则跳转
                 window.location.href = "note-details.html?noteId=" + data.id;
             },
-            error: function () {
+            error: function (data) {
                 $('#note_add_submit').removeClass('disabled');
-                $.growl.error({title: "发生错误", message: '服务器错误。<br>请稍后提交。'});
+                $.growl.error({
+                    title: "发生错误",
+                    message: '服务器错误。<br> 时间:'+data.responseJSON.timestamp+'<br>'+data.responseJSON.message});
             }
         });
     });
