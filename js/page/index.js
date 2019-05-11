@@ -17,12 +17,52 @@ $(function () {
     initPage();
     let documentBody = $("body");
 
+    /**
+     * 获取省份列表
+     */
+    $.get(URL_PROVINCES, function(data,status){
+        data.forEach(v=>{
+            let option = `<option value="${v.idNum}">${v.name}</option>`;
+            $('#provinceList').append(option);
+        })
+    }, 'json');
+    /**
+     * 根据省份填充城市
+     */
+    $('#provinceList').change(function () {
+        fillCityList(this.value);
+        fillSchoolList(this.value);
+    });
+    fillCityList("110000");
+    fillSchoolList("110000");
+    function fillCityList(inNum){
+        $("#cityList").empty();
+        $.get(URL_CITY_LIST,{idNumParent:inNum},function(data, status){
+            data.forEach(v=>{
+                let option = `<option value="${v.id}">${v.name}</option>`;
+                $('#cityList').append(option);
+            })
+        }, 'json');
+    }
+
+    function fillSchoolList(inNum){
+        $("#schoolList").empty();
+        $.get(URL_SCHOOL_LIST,{areaId:inNum+"00"},function(data,status){
+            data.forEach(v=>{
+                let option = `<option value="${v.id}">${v.schoolName}</option>`;
+                $('#schoolList').append(option);
+            })
+        }, 'json');
+    }
+
+
 
     /**
-     * 注册按钮触发页面跳转
+     * 添加更多
      * */
     $('.next-page').click(function(){
-        getNoteListPage(page++, size, sort)
+        let search = $("#search-val").val();
+        getNoteListPage(page++, size, sort,search)
     });
 
     /**
@@ -54,23 +94,6 @@ $(function () {
         });
     });
 
-    // $(document).on("click",".noteTrash", function() {
-    //     let id = $(this).parent().parent().parent().attr("data-note-id");
-    //         $.ajax({
-    //             type: 'GET',
-    //             url: SERVER_URL + 'api/note/'+id+'/noteTrash?token='+token,
-    //             dataType: "json",
-    //             contentType: "application/json;charset=UTF-8",
-    //             success: function (data) {
-    //                 console.log("noteTrash " + data.noteTrash + "");
-    //                 $('#note-'+id).find('.noteTrash').text(data.noteTrash);
-    //                 $.growl({title: "成功", message: "踩!"});
-    //             },
-    //             error: function (data) {
-    //                 $.growl.error({title: "发生错误", message: '服务器错误。'});
-    //             }
-    //         });
-    // });
     /**
      * 踩
      */
@@ -92,6 +115,14 @@ $(function () {
         });
     });
 
+    /**
+     * 模糊搜索
+     */
+    documentBody.delegate("#search-submit","click",function(){
+        let search = $("#search-val").val();
+        $(".note-list").empty();
+        getNoteListPage(page,size,sort,search);
+    });
 });
 /**
  * 页面初始化
@@ -103,12 +134,12 @@ const initPage = function () {
 /**
  * 获取列表值
  */
-const getNoteListPage = function (page, size, sort) {
+const getNoteListPage = function (page, size, sort,search,city,school) {
     console.log("getNoteListPage 获取列表值.");
     console.log("get" + SERVER_URL + "api/note");
     $.get(
         SERVER_URL + "api/note",
-        {page: page, size: size, sort: sort},
+        {page: page, size: size, sort: sort, search:search, city:city, school:school},
         function (data) {
             console.log("return " + data + "");
             addNoteList(data);
@@ -136,8 +167,8 @@ const addNoteList = function (data) {
                                 <a class="" target="_blank" href=\\\\"/u/d7184de1da60\\\\">${v.user.username}</a>
                                 <span  aria-hidden="true">${v.noteSchool.schoolName}</span>&nbsp&nbsp
                                 <span  aria-hidden="true">${v.noteCity.name}</span>&nbsp&nbsp
-                                <span class="glyphicon glyphicon-thumbs-up notePraise  btn btn-info" aria-hidden="true">${v.notePraise}</span>&nbsp&nbsp
-                                <span class="glyphicon glyphicon-thumbs-down noteTrash  btn btn-danger" onclick="onclickNoteTrash(this)">${v.noteTrash}</span>&nbsp&nbsp
+                                <span class="glyphicon glyphicon-thumbs-up notePraise  btn btn-info">${v.notePraise}</span>&nbsp&nbsp
+                                <span class="glyphicon glyphicon-thumbs-down noteTrash  btn btn-danger">${v.noteTrash}</span>&nbsp&nbsp
                                 <span class="glyphicon glyphicon-fire noteReadCount">${v.noteReadCount}</span>&nbsp&nbsp
                             </div>
                         </div>
@@ -155,8 +186,8 @@ const addNoteList = function (data) {
                             <div class="panel-footer">
                                 <span  aria-hidden="true">${v.noteSchool.schoolName}</span>&nbsp&nbsp
                                 <span  aria-hidden="true">${v.noteCity.name}</span>&nbsp&nbsp
-                                <span class="glyphicon glyphicon-thumbs-up notePraise" aria-hidden="true">${v.notePraise}</span>&nbsp&nbsp
-                                <span class="glyphicon glyphicon-thumbs-down noteTrash">${v.noteTrash}</span>&nbsp&nbsp
+                                <span class="glyphicon glyphicon-thumbs-up notePraise  btn btn-info">${v.notePraise}</span>&nbsp&nbsp
+                                <span class="glyphicon glyphicon-thumbs-down noteTrash btn btn-danger">${v.noteTrash}</span>&nbsp&nbsp
                                 <span class="glyphicon glyphicon-fire noteReadCount">${v.noteReadCount}</span>&nbsp&nbsp
                             </div>
                         </div>
