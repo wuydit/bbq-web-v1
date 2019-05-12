@@ -80,10 +80,30 @@ $(function () {
 
                 $(".note-add").removeClass("hidden");
                 $(".my").removeClass("hidden");
+
+                $.ajax({
+                    type: 'GET',
+                    url: GET_USER,
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader("Authorization","Bearer " +  data.token);
+                    },
+                    dataType: "json",
+                    contentType: "application/json;charset=UTF-8",
+                    data: {username:data.user.username},
+                    success: function (data) {
+                        $.cookie(BBQ_USER_ID, data.id, { expires: 0.083 });
+                        $.cookie(BBQ_USER_USERNAME, data.username, { expires: 0.083 });
+                        $.cookie(BBQ_USER_EMAIL, data.email, { expires: 0.083 });
+                        $.cookie(BBQ_USER_PHONE, data.phone, { expires: 0.083 });
+                    },
+                    error: function () {
+                        $.growl.error({title: "发生错误", message: '服务器错误。<br>请稍后提交。'});
+                    }
+                });
             },
             error: function (data) {
                 $('#auth_login_msg').empty();
-                let msg =`<div class="alert alert-danger" role="alert">${data.message}</div>`;
+                let msg =`<div class="alert alert-danger" role="alert">${data.responseJSON.message}</div>`;
                 $('#auth_login_msg').append(msg);
             }
         });

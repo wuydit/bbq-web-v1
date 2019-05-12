@@ -3,17 +3,28 @@
  */
 const BBQ_USER_COOKIE = 'bbq_user_cookie';
 const BBQ_USER_TOKEN_COOKIE = 'bbq_user_token_cookie';
+const BBQ_USER = 'bbq_user';
+const BBQ_USER_ID = 'bbq_user_id';
+const BBQ_USER_USERNAME = 'bbq_user_username';
+const BBQ_USER_EMAIL = 'bbq_user_email';
+const BBQ_USER_PHONE = 'bbq_user_phone';
 
-let bbq_user = $.cookie(BBQ_USER_COOKIE);
+const bbq_user = $.cookie(BBQ_USER_COOKIE);
 const token = $.cookie(BBQ_USER_TOKEN_COOKIE);
+const auth_user = $.cookie(BBQ_USER);
+
+const bbq_user_id = $.cookie(BBQ_USER_ID);
+const bbq_user_username = $.cookie(BBQ_USER_USERNAME);
+const bbq_user_email = $.cookie(BBQ_USER_EMAIL);
+const bbq_user_phone = $.cookie(BBQ_USER_PHONE);
 
 const API = 'api/';
 const AUTH = 'auth/';
 const SERVER_URL = "http://localhost:8000/";
-const URL_NOTE_ADD = SERVER_URL + API + 'note' + '?token=' + token;
-const URL_PROVINCES = SERVER_URL + API + 'provinces' + '?token=' + token;
-const URL_CITY_LIST = SERVER_URL + API + 'citys' + '?token=' + token;
-const URL_SCHOOL_LIST = SERVER_URL + API + 'schools' + '?token=' + token;
+const URL_NOTE_ADD = SERVER_URL + API + 'note';
+const URL_PROVINCES = SERVER_URL + API + 'provinces';
+const URL_CITY_LIST = SERVER_URL + API + 'citys';
+const URL_SCHOOL_LIST = SERVER_URL + API + 'schools';
 const LOGIN_URL = SERVER_URL + AUTH + 'login';
 
 const REGISTER_IS_USERNAME = SERVER_URL + API + 'user/isUsername/';
@@ -29,18 +40,21 @@ const REGISTER_URL = SERVER_URL + API + 'register';
 /**
  *
  */
-const URL_NOTE_PRAISE = SERVER_URL + API + 'notePraise' + '?token=' + token;
+const URL_NOTE_PRAISE = SERVER_URL + API + 'notePraise';
 
 /**
  *
  * @type {string}
  */
-const URL_IS_SENSITIVE_WORD = SERVER_URL + API + 'isSensitiveWord' + '?token=' + token;
+const URL_IS_SENSITIVE_WORD = SERVER_URL + API + 'isSensitiveWord';
+
+const GET_USER = SERVER_URL + API + 'user';
+
 /**
  *
  * @type {string}
  */
-const URL_REPLACE_SENSITIVE_WORD = SERVER_URL + API + 'replaceSensitiveWord' + '?token=' + token;
+const URL_REPLACE_SENSITIVE_WORD = SERVER_URL + API + 'replaceSensitiveWord';
 
 $.getUrlParam = function(name) {
     let reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");

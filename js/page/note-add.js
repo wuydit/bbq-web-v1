@@ -46,6 +46,9 @@ $(function () {
 
         $.ajax({
             type: 'POST',
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Authorization","Bearer " + token);
+            },
             url: URL_NOTE_ADD,
             dataType: "json",
             contentType: "application/json;charset=UTF-8",
@@ -107,6 +110,9 @@ function isSensitiveWord(word){
     $.ajax({
         type: 'GET',
         url: URL_IS_SENSITIVE_WORD,
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("Authorization","Bearer " + token);
+        },
         dataType: "json",
         contentType: "application/json;charset=UTF-8",
         data: {word:word},
@@ -125,6 +131,9 @@ function replaceSensitiveWord(word){
     let result = word;
     $.ajax({
         type: 'GET',
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("Authorization","Bearer " + token);
+        },
         url: URL_REPLACE_SENSITIVE_WORD,
         dataType: "json",
         contentType: "application/json;charset=UTF-8",
