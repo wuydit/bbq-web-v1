@@ -4,16 +4,16 @@
 let page = 0;
 let size = 10;
 let sort = {sort: 'createTime,desc'};
-// $.cookie('the_cookie', 'the_value', { expires: 7 });
-// let user = $.cookie('the_cookie');
-// console.log(user);
-//首先判断cookie 若是 cookie 存储用户信息，以及token
-// 根据登录信息去更新页面中的div展示 登录 和正在登录的信息等
-//去渲染整个页面需要查询的数据 若用户存在查用户所在学校，否则查询数据库最新的几条动态
-//分页查询
 
 
 $(function () {
+    if(typeof bbq_user != 'undefined' && bbq_user != null){
+        $(".login").addClass("hidden");
+        $(".register").addClass("hidden");
+
+        $(".note-add").removeClass("hidden");
+        $(".my").removeClass("hidden");
+    }
     initPage();
     let documentBody = $("body");
 
@@ -57,6 +57,37 @@ $(function () {
         }, 'json');
     }
 
+    /**
+     * 登录验证
+     */
+    $('#loginAuth').click(function(){
+        console.log("login");
+        let username = $("#loginUsername").val();
+        let password = $("#loginPassword").val();
+        $.ajax({
+            type: 'POST',
+            url: LOGIN_URL,
+            dataType: "json",
+            data: JSON.stringify({username:username,password:password}),
+            contentType: "application/json;charset=UTF-8",
+            success: function (data) {
+                $('#loginModal').modal('hide');
+                $.cookie(BBQ_USER_TOKEN_COOKIE, data.token, { expires: 0.083 });
+                $.cookie(BBQ_USER_COOKIE, data.user, { expires: 0.083 });
+
+                $(".login").addClass("hidden");
+                $(".register").addClass("hidden");
+
+                $(".note-add").removeClass("hidden");
+                $(".my").removeClass("hidden");
+            },
+            error: function (data) {
+                $('#auth_login_msg').empty();
+                let msg =`<div class="alert alert-danger" role="alert">${data.message}</div>`;
+                $('#auth_login_msg').append(msg);
+            }
+        });
+    });
 
 
     /**
@@ -68,18 +99,6 @@ $(function () {
         let school = $("#schoolList").val();
         getNoteListPage(page++, size, sort,search,city,school)
     });
-
-
-    // /**
-    //  * 更改城市按照城市查询
-    //  */
-    // $('#cityList').change(function () {
-    //     this.value
-    //
-    //     let search = $("#search-val").val();
-    //     $(".note-list").empty();
-    //     getNoteListPage(page,size,sort,search);
-    // });
 
     /**
      * 跳转到详情页

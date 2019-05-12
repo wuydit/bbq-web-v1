@@ -38,40 +38,41 @@
 </nav>
 <div class="m">
     <div class="form-group">
-        <label for="noteAddInputTitle">标题</label>
-        <input type="text" class="form-control" id="noteAddInputTitle" placeholder="文章标题">
+        <label for="username">用户名</label>
+        <input type="text" class="form-control" id="username" placeholder="用户名">
+        <div class="btn btn-default verification-username">验证用户名是否被占用</div>
+        <div class="alert alert-danger hidden verification-username-danger" role="alert">用户名已被注册</div>
+        <div class="alert alert-success hidden verification-username-success" role="alert">用户名可用</div>
     </div>
     <div class="form-group">
-        <label for="noteAbstract">概述</label>
-        <textarea  class="form-control" rows="3" id="noteAbstract" placeholder="文章概述"></textarea>
+        <label for="email">邮箱</label>
+        <input type="email" class="form-control" id="email" placeholder="邮箱">
+        <div class="btn btn-default verification-email">验证邮箱是否被占用</div>&nbsp<div class="btn btn-info send-code">发送验证码</div>
+        <div class="alert alert-danger hidden send-code-danger" role="alert">验证码发送失败</div>
+        <div class="alert alert-success hidden send-code-success" role="alert">验证码发送成功</div>
+        <div class="alert alert-danger hidden verification-email-danger" role="alert">邮箱已经注册，请找回密码。</div>
+        <div class="alert alert-success hidden verification-email-success" role="alert">邮箱可用</div>
+        <div class="alert alert-danger hidden verification-email-check" role="alert">邮箱格式不对</div>
     </div>
     <div class="form-group">
-        <label for="noteAddInputBody">内容</label>
-        <div id="noteAddInputBody" class="summer-note">文章内容</div>
+        <label for="code">验证码</label>
+        <input type="text" class="form-control" id="code" placeholder="验证码">
     </div>
-    <div class="form-group col-md-3">
-        <label for="provinceList">省份列表</label>
-        <select class="form-control" id="provinceList"></select>
+    <div class="form-group">
+        <label for="code">密码</label>
+        <input type="password" class="form-control" id="password" placeholder="密码">
     </div>
-    <div class="form-group col-md-3">
-        <label for="cityList">城市列表</label>
-        <select class="form-control" id="cityList"></select>
+    <div class="form-group">
+        <label for="nextPassword">重新输入密码</label>
+        <input type="password" class="form-control" id="nextPassword" placeholder="密码">
     </div>
-    <div class="form-group col-md-3">
-        <label for="schoolList">学校列表</label>
-        <select class="form-control" id="schoolList">
-            <option></option>
-        </select>
-    </div>
-    <div class="form-group col-md-3">
-        <label for="schoolList">是否匿名</label>
-        <select class="form-control" id="isAnonymous">
-            <option value="false">否</option>
-            <option value="true">是</option>
-        </select>
+    <div class="alert alert-danger hidden verification-password-check" role="alert">密码输入不一致</div>
+    <div class="form-group">
+        <label for="phone">手机号</label>
+        <input type="text" class="form-control" id="phone" placeholder="手机号">
     </div>
     <div>
-        <button type="submit" id="note_add_submit" class="btn btn-primary">发布</button>
+        <div  id="register_submit" class="btn btn-primary">注册</div>
     </div>
 </div>
 </body>

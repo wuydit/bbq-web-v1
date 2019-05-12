@@ -45,22 +45,6 @@ $(function () {
             }
         });
     });
-    // documentBody.delegate(".noteTrash","click",function(){
-    //     $.ajax({
-    //         type: 'GET',
-    //         url: SERVER_URL + 'api/note/'+noteId+'/noteTrash?token='+token,
-    //         dataType: "json",
-    //         contentType: "application/json;charset=UTF-8",
-    //         success: function (data) {
-    //             console.log("noteTrash " + data.noteTrash + "");
-    //             $('#note-'+id).find('.noteTrash').text(data.noteTrash);
-    //             $.growl({title: "成功", message: "踩!"});
-    //         },
-    //         error: function (data) {
-    //             $.growl.error({title: "发生错误", message: '服务器错误。'});
-    //         }
-    //     });
-    // });
 });
 
 /**

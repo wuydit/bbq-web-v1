@@ -52,13 +52,13 @@
                 <li><a href="#" class="login" data-toggle="modal" data-target="#loginModal">登录</a></li>
                 <li><a href="register.html" class="register">注册</a></li>
 
-                <li>
-                    <a href="note-add.html" class="register">
+                <li class="hidden note-add">
+                    <a href="note-add.html" >
                         <span class="glyphicon glyphicon-pencil" aria-hidden="true">发帖</span>
                     </a>
 
                 </li>
-                <li class="dropdown">
+                <li class="dropdown my hidden">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">我的
                         <span class="caret"></span></a>
@@ -67,7 +67,7 @@
                         <li><a href="#">修改个人信息</a></li>
                         <li><a href="#">修改密码</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">退出</a></li>
+                        <li><a class="logout" href="#">退出</a></li>
                     </ul>
                 </li>
             </ul><!--  /.navbar-right -->
@@ -111,16 +111,19 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label for="loginUsername">用户名</label>
-                    <input type="text" class="form-control" id="loginUsername" placeholder="请输入用户名|邮箱|手机号">
+                    <input type="text" class="form-control" id="loginUsername" placeholder="请输入用户名">
                 </div>
                 <div class="form-group">
                     <label for="loginPassword">密码</label>
                     <input type="password" class="form-control" id="loginPassword" placeholder="密码">
                 </div>
+                <div id="auth_login_msg">
+
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭当前</button>
-                <button type="button" class="btn btn-default register">注册</button>
+                <a class="btn btn-default register">注册</a>
                 <button type="button" class="btn btn-primary" id="loginAuth">登录</button>
             </div>
         </div>
