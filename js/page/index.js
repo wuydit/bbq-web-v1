@@ -37,6 +37,7 @@ $(function () {
     fillSchoolList("110000");
     function fillCityList(inNum){
         $("#cityList").empty();
+        $('#cityList').append("<option value=\"\">不选</option>");
         $.get(URL_CITY_LIST,{idNumParent:inNum},function(data, status){
             data.forEach(v=>{
                 let option = `<option value="${v.id}">${v.name}</option>`;
@@ -47,6 +48,7 @@ $(function () {
 
     function fillSchoolList(inNum){
         $("#schoolList").empty();
+        $('#schoolList').append("<option value=\"\">不选</option>");
         $.get(URL_SCHOOL_LIST,{areaId:inNum+"00"},function(data,status){
             data.forEach(v=>{
                 let option = `<option value="${v.id}">${v.schoolName}</option>`;
@@ -62,8 +64,22 @@ $(function () {
      * */
     $('.next-page').click(function(){
         let search = $("#search-val").val();
-        getNoteListPage(page++, size, sort,search)
+        let city = $("#cityList").val();
+        let school = $("#schoolList").val();
+        getNoteListPage(page++, size, sort,search,city,school)
     });
+
+
+    // /**
+    //  * 更改城市按照城市查询
+    //  */
+    // $('#cityList').change(function () {
+    //     this.value
+    //
+    //     let search = $("#search-val").val();
+    //     $(".note-list").empty();
+    //     getNoteListPage(page,size,sort,search);
+    // });
 
     /**
      * 跳转到详情页
@@ -120,8 +136,10 @@ $(function () {
      */
     documentBody.delegate("#search-submit","click",function(){
         let search = $("#search-val").val();
+        let city = $("#cityList").val();
+        let school =  $('#schoolList').val();
         $(".note-list").empty();
-        getNoteListPage(page,size,sort,search);
+        getNoteListPage(page,size,sort,search,city,school);
     });
 });
 /**
@@ -135,13 +153,10 @@ const initPage = function () {
  * 获取列表值
  */
 const getNoteListPage = function (page, size, sort,search,city,school) {
-    console.log("getNoteListPage 获取列表值.");
-    console.log("get" + SERVER_URL + "api/note");
     $.get(
         SERVER_URL + "api/note",
         {page: page, size: size, sort: sort, search:search, city:city, school:school},
         function (data) {
-            console.log("return " + data + "");
             addNoteList(data);
         });
 };
