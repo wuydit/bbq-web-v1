@@ -12,7 +12,10 @@ $(function () {
     documentBody.delegate(".notePraise","click",function(){
         $.ajax({
             type: 'GET',
-            url: SERVER_URL + 'api/note/'+noteId+'/notePraise?token='+token,
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Authorization","Bearer " + token);
+            },
+            url: SERVER_URL + 'api/note/'+noteId+'/notePraise',
             dataType: "json",
             contentType: "application/json;charset=UTF-8",
             success: function (data) {
