@@ -1,6 +1,6 @@
 
 const noteId = $.getUrlParam('noteId');
-const URL_NOTE_GET_BY_ID = SERVER_URL + API + 'note/'+ noteId + '?token=' + token;
+const URL_NOTE_GET_BY_ID = SERVER_URL + API + 'note/'+ noteId;
 
 console.log("URL_NOTE_GET_BY_ID" + URL_NOTE_GET_BY_ID);
 $(function () {

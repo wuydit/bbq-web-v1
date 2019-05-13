@@ -4,7 +4,7 @@
 let page = 0;
 let size = 10;
 let sort = {sort: 'createTime,desc'};
-
+let index_token = $.cookie(BBQ_USER_TOKEN_COOKIE)
 
 $(function () {
     if(typeof bbq_user != 'undefined' && bbq_user != null){
@@ -74,6 +74,7 @@ $(function () {
                 $('#loginModal').modal('hide');
                 $.cookie(BBQ_USER_TOKEN_COOKIE, data.token, { expires: 0.083 });
                 $.cookie(BBQ_USER_COOKIE, data.user, { expires: 0.083 });
+                index_token = data.token;
 
                 $(".login").addClass("hidden");
                 $(".register").addClass("hidden");
@@ -95,6 +96,7 @@ $(function () {
                         $.cookie(BBQ_USER_USERNAME, data.username, { expires: 0.083 });
                         $.cookie(BBQ_USER_EMAIL, data.email, { expires: 0.083 });
                         $.cookie(BBQ_USER_PHONE, data.phone, { expires: 0.083 });
+
                     },
                     error: function () {
                         $.growl.error({title: "发生错误", message: '服务器错误。<br>请稍后提交。'});
@@ -135,8 +137,11 @@ $(function () {
         let id = $(this).parent().parent().parent().attr("data-note-id");
         $.ajax({
             type: 'GET',
-            url: SERVER_URL + 'api/note/'+id+'/notePraise?token='+token,
+            url: SERVER_URL + 'api/note/'+id+'/notePraise',
             dataType: "json",
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Authorization","Bearer " + index_token);
+            },
             contentType: "application/json;charset=UTF-8",
             success: function (data) {
                 console.log("notePraise " + data.notePraise + "");
@@ -156,8 +161,11 @@ $(function () {
       let id = $(this).parent().parent().parent().attr("data-note-id");
         $.ajax({
             type: 'GET',
-            url: SERVER_URL + 'api/note/'+id+'/noteTrash?token='+token,
+            url: SERVER_URL + 'api/note/'+id+'/noteTrash',
             dataType: "json",
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Authorization","Bearer " + index_token);
+            },
             contentType: "application/json;charset=UTF-8",
             success: function (data) {
                 console.log("noteTrash " + data.noteTrash + "");
