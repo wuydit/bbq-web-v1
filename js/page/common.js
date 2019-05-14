@@ -80,6 +80,24 @@ $(function () {
     if(typeof bbq_user == 'undefined' && bbq_user == null && !url.indexOf("index.html")){
         window.location.href = "index.html";
     }
+
+    $(".logout").click(function () {
+        $.removeCookie(BBQ_USER_COOKIE);
+        $.removeCookie(BBQ_USER_TOKEN_COOKIE);
+        window.location.href = "index.html";
+    });
+
+    if(bbq_user_id === 1 || bbq_user_id === '1'){
+        $(".admin").removeClass("hidden");
+    }
+
+    if(typeof bbq_user != 'undefined' && bbq_user != null){
+        $(".note-add").removeClass("hidden");
+        $(".my").removeClass("hidden");
+    }else {
+        $(".note-add").addClass("hidden");
+        $(".my").addClass("hidden");
+    }
 });
 
 

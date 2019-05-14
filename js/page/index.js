@@ -13,6 +13,9 @@ $(function () {
 
         $(".note-add").removeClass("hidden");
         $(".my").removeClass("hidden");
+    }else {
+        $(".note-add").addClass("hidden");
+        $(".my").addClass("hidden");
     }
     initPage();
     let documentBody = $("body");
@@ -100,7 +103,9 @@ $(function () {
                         $.cookie(BBQ_USER_USERNAME, data.username, { expires: expiresDate });
                         $.cookie(BBQ_USER_EMAIL, data.email, { expires: expiresDate });
                         $.cookie(BBQ_USER_PHONE, data.phone, { expires: expiresDate });
-
+                        if(data.id === 1 || data.id === '1'){
+                            $(".admin").removeClass("hidden");
+                        }
                     },
                     error: function () {
                         $.growl.error({title: "发生错误", message: '服务器错误。<br>请稍后提交。'});
