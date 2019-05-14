@@ -24,6 +24,14 @@ $(function () {
         window.location.href = "note-details.html?noteId=" + id;
     });
 
+    // /**
+    //  * 私信
+    //  */
+    // documentBody.delegate(".private-letter-btn","click",function(){
+    //     let id = $(this).attr("data-note-id");
+    //     window.location.href = "note-details.html?noteId=" + id;
+    // });
+
     $('.note-btn').click(function () {
         $('.profile_nav').removeClass("active");
         $('.messages_nav').removeClass("active");
@@ -77,6 +85,31 @@ $(function () {
 
     });
 
+
+    /**
+     * 私信
+     */
+    $('#privateLetter-sub').click(function(){
+
+        $.ajax({
+            type: 'POST',
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Authorization","Bearer " + token);
+            },
+            url: SERVER_URL + 'api/setPrivateLetter',
+            data: JSON.stringify({msg:$("#privateLetter-msg"),toUser:{id:userId},fromUser:{id:bbq_user_id}}),
+            dataType: "json",
+            contentType: "application/json;charset=UTF-8",
+            success: function (data) {
+                $('#privateLetterModal').modal('hide');
+                $.growl({title: "成功", message: "踩!"});
+            },
+            error: function (data) {
+                $.growl.error({title: "发生错误", message: '服务器错误。'});
+            }
+        });
+        console.log("privateLetter-sub");
+    });
 });
 
 function sendMessage() {
@@ -112,7 +145,7 @@ const initPage = function (){
                          <span>文章：${data.noteSize}</span>
                          <span>字数：${data.noteContentSize}</span>
                         </div class="private-letter">
-                            <div class="private-letter-btn btn-info btn col-md-2 ${hidden}">私信</div>
+                            <div class="private-letter-btn btn-info btn col-md-2 ${hidden}" data-toggle="modal" data-target="#privateLetterModal">私信</div>
                         </div>
                         `;
             $('.user-info').empty();
