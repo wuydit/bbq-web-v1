@@ -21,6 +21,7 @@ const bbq_user_phone = $.cookie(BBQ_USER_PHONE);
 const API = 'api/';
 const AUTH = 'auth/';
 const SERVER_URL = "http://localhost:8000/";
+const SERVER_SOCKET_URL = "ws://localhost:8000";
 const URL_NOTE_ADD = SERVER_URL + API + 'note';
 const URL_PROVINCES = SERVER_URL + API + 'provinces';
 const URL_CITY_LIST = SERVER_URL + API + 'citys';
@@ -66,6 +67,13 @@ $(function () {
     $(".logout").click(function () {
         $.removeCookie(BBQ_USER_COOKIE);
         $.removeCookie(BBQ_USER_TOKEN_COOKIE);
+        $.removeCookie(BBQ_USER_COOKIE);
+        $.removeCookie(BBQ_USER_TOKEN_COOKIE);
+        $.removeCookie(BBQ_USER);
+        $.removeCookie(BBQ_USER_ID);
+        $.removeCookie(BBQ_USER_USERNAME);
+        $.removeCookie(BBQ_USER_EMAIL);
+        $.removeCookie(BBQ_USER_PHONE);
         window.location.href = "index.html";
     });
     let url = window.location.href;

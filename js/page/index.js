@@ -72,8 +72,10 @@ $(function () {
             contentType: "application/json;charset=UTF-8",
             success: function (data) {
                 $('#loginModal').modal('hide');
-                $.cookie(BBQ_USER_TOKEN_COOKIE, data.token, { expires: 0.083 });
-                $.cookie(BBQ_USER_COOKIE, data.user, { expires: 0.083 });
+                let expiresDate = new Date();
+                expiresDate.setTime(expiresDate.getTime()+7200*1000);
+                $.cookie(BBQ_USER_TOKEN_COOKIE, data.token, { expires: expiresDate });
+                $.cookie(BBQ_USER_COOKIE, data.user, { expires: expiresDate });
                 index_token = data.token;
 
                 $(".login").addClass("hidden");
@@ -92,10 +94,12 @@ $(function () {
                     contentType: "application/json;charset=UTF-8",
                     data: {username:data.user.username},
                     success: function (data) {
-                        $.cookie(BBQ_USER_ID, data.id, { expires: 0.083 });
-                        $.cookie(BBQ_USER_USERNAME, data.username, { expires: 0.083 });
-                        $.cookie(BBQ_USER_EMAIL, data.email, { expires: 0.083 });
-                        $.cookie(BBQ_USER_PHONE, data.phone, { expires: 0.083 });
+                        let expiresDate = new Date();
+                        expiresDate.setTime(expiresDate.getTime()+7200*1000);
+                        $.cookie(BBQ_USER_ID, data.id, { expires: expiresDate });
+                        $.cookie(BBQ_USER_USERNAME, data.username, { expires: expiresDate });
+                        $.cookie(BBQ_USER_EMAIL, data.email, { expires: expiresDate });
+                        $.cookie(BBQ_USER_PHONE, data.phone, { expires: expiresDate });
 
                     },
                     error: function () {
@@ -226,7 +230,7 @@ const addNoteList = function (data) {
                                 ${v.noteAbstract}
                             </div>
                             <div class="panel-footer">
-                                <a class="" target="_blank" href=\\\\"/u/d7184de1da60\\\\">${v.user.username}</a>
+                                <a class="" target="_blank" href="home.html?userId=${v.user.id}">${v.user.username}</a>
                                 <span  aria-hidden="true">${v.noteSchool.schoolName}</span>&nbsp&nbsp
                                 <span  aria-hidden="true">${v.noteCity.name}</span>&nbsp&nbsp
                                 <span class="glyphicon glyphicon-thumbs-up notePraise  btn btn-info">${v.notePraise}</span>&nbsp&nbsp
