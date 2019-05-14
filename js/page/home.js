@@ -8,6 +8,9 @@ $(function () {
     if(userId == null || typeof userId == "undefined"){
         userId = bbq_user_id;
         $(".messages_nav").removeClass("hidden");
+    }else {
+        console.log("private-letter");
+        $(".private-letter").removeClass("hidden");
     }
 
     let documentBody = $("body");
@@ -97,6 +100,10 @@ const initPage = function (){
         dataType: "json",
         contentType: "application/json;charset=UTF-8",
         success: function (data) {
+            let hidden ="hidden";
+            if( $.getUrlParam('userId') != null){
+                hidden="";
+            }
             let dom = `<div>
                             <h1 class="col-md-4">${data.username}</h1>
                         </div>
@@ -105,7 +112,7 @@ const initPage = function (){
                          <span>文章：${data.noteSize}</span>
                          <span>字数：${data.noteContentSize}</span>
                         </div class="private-letter">
-                            <div class="private-letter-btn btn-info btn col-md-2 hidden">私信</div>
+                            <div class="private-letter-btn btn-info btn col-md-2 ${hidden}">私信</div>
                         </div>
                         `;
             $('.user-info').empty();
