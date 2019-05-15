@@ -128,7 +128,8 @@ $(function () {
         let search = $("#search-val").val();
         let city = $("#cityList").val();
         let school = $("#schoolList").val();
-        getNoteListPage(page++, size, sort,search,city,school)
+        page +=1;
+        getNoteListPage(page, size, sort,search,city,school)
     });
 
     /**
@@ -209,6 +210,7 @@ const initPage = function () {
  * 获取列表值
  */
 const getNoteListPage = function (page, size, sort,search,city,school) {
+    console.log("下一页：" + page);
     $.get(
         SERVER_URL + "api/note",
         {page: page, size: size, sort: sort, search:search, city:city, school:school},
@@ -226,7 +228,7 @@ const addNoteList = function (data) {
     if (!!data && data.content && data.content.length > 0) {
         data.content.forEach(v => {
             if (!v.isAnonymous) {
-                let note_node = `<div id='note-${v.id}' data-note-id='${v.id}' class="col-md-4 note">
+                let note_node = `<div id='note-${v.id}' data-note-id='${v.id}' class="col-md-offset-3 col-md-6 note">
                         <div class="panel panel-default ">
                             <div class="panel-heading note-url">
                                 ${v.noteTitle}
@@ -246,7 +248,7 @@ const addNoteList = function (data) {
                     </div>`;
                 $(".note-list").append(note_node);
             } else {
-                let note_node = `<div id='note-${v.id}' data-note-id='${v.id}' class="col-md-4 note">
+                let note_node = `<div id='note-${v.id}' data-note-id='${v.id}' class="col-md-offset-3 col-md-6 note">
                         <div class="panel panel-default ">
                             <div class="panel-heading text-center note-url">
                                 ${v.noteTitle}
@@ -266,6 +268,8 @@ const addNoteList = function (data) {
                 $(".note-list").append(note_node);
             }
         });
+    }else {
+        page -= 1;
     }
 };
 

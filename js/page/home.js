@@ -90,19 +90,19 @@ $(function () {
      * 私信
      */
     $('#privateLetter-sub').click(function(){
-
+        let msg = $("#privateLetter-msg").val();
         $.ajax({
             type: 'POST',
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization","Bearer " + token);
             },
             url: SERVER_URL + 'api/setPrivateLetter',
-            data: JSON.stringify({msg:$("#privateLetter-msg"),toUser:{id:userId},fromUser:{id:bbq_user_id}}),
+            data: JSON.stringify({msg:msg,toUser:{id:userId},fromUser:{id:bbq_user_id}}),
             dataType: "json",
             contentType: "application/json;charset=UTF-8",
             success: function (data) {
                 $('#privateLetterModal').modal('hide');
-                $.growl({title: "成功", message: "踩!"});
+                $.growl({title: "成功", message: "私信已发出!"});
             },
             error: function (data) {
                 $.growl.error({title: "发生错误", message: '服务器错误。'});
