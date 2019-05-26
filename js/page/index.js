@@ -136,14 +136,24 @@ $(function () {
      * 跳转到详情页
      */
     documentBody.delegate(".note-url","click",function(){
-        let id = $(this).parent().parent().attr("data-note-id");
-        window.location.href = "note-details.html?noteId=" + id;
+        console.log(typeof bbq_user == 'undefined' || bbq_user == null);
+        if(typeof bbq_user == 'undefined' || bbq_user == null){
+            $.growl.error({title: "请先登录", message: '登录。'});
+            $('#loginModal').modal('show');
+        }else {
+            let id = $(this).parent().parent().attr("data-note-id");
+            window.location.href = "note-details.html?noteId=" + id;
+        }
     });
 
     /**
      * 点赞
      */
     documentBody.delegate(".notePraise","click",function(){
+        if(typeof bbq_user == 'undefined'|| bbq_user == null ){
+            $.growl.error({title: "请先登录", message: '登录。'});
+            $('#loginModal').modal('show');
+        }else {
         let id = $(this).parent().parent().parent().attr("data-note-id");
         $.ajax({
             type: 'GET',
@@ -162,12 +172,17 @@ $(function () {
                 $.growl.error({title: "发生错误", message: '服务器错误。'});
             }
         });
+        }
     });
 
     /**
      * 踩
      */
     documentBody.delegate(".noteTrash","click",function(){
+        if(typeof bbq_user == 'undefined' || bbq_user == null){
+            $.growl.error({title: "请先登录", message: '登录。'});
+            $('#loginModal').modal('show');
+        }else {
       let id = $(this).parent().parent().parent().attr("data-note-id");
         $.ajax({
             type: 'GET',
@@ -185,7 +200,7 @@ $(function () {
             error: function (data) {
                 $.growl.error({title: "发生错误", message: '服务器错误。'});
             }
-        });
+        });}
     });
 
     /**

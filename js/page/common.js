@@ -77,7 +77,7 @@ $(function () {
         window.location.href = "index.html";
     });
     let url = window.location.href;
-    if(typeof bbq_user == 'undefined' && bbq_user == null && !url.indexOf("index.html")){
+    if((typeof bbq_user == 'undefined'|| bbq_user == null )&& !url.indexOf("index.html")){
         window.location.href = "index.html";
     }
 
